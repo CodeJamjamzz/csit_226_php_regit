@@ -11,7 +11,7 @@
         <div class="categories">
             <div class="cate"><a href="index.php">Login</a></div>
             <div class="cate"><a href="about.php">About</a></div>
-            <div class="cate"><a href="contacts.php">Contact</a></div>
+            <div class="cate"><a href="contacts.html">Contact</a></div>
             <div class="cate"><a href="eventDashboard.php">Dashboard</a></div>
         </div>
         <img src="images/search.png" alt="Search Icon" class="search-icon">

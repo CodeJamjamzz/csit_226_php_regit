@@ -9,22 +9,21 @@
 </head>
 <body>
 
-    <nav>
+<nav>
         <div class="logo">
             <img src="images/logo.png" >
             <h1 class="logo-name">Regit</h1>
         </div>
 
         <div class="categories">
-            <div class="cate"><a href="index.html">Login</a></div>
-            <div class="cate"><a href="about.html">About</a></div>
-            <div class="cate"><a href="contacts.html">Contact</a></div>
+            <div class="cate"><a href="index.php">Login</a></div>
+            <div class="cate"><a href="about.php">About</a></div>
+            <div class="cate"><a href="contacts.php">Contact</a></div>
             <div class="cate"><a href="eventDashboard.php">Dashboard</a></div>
         </div>
         <img src="images/search.png" alt="Search Icon" class="search-icon">
         <input type="text" class="search-input" placeholder="Search">
         
-    </nav>
 
 <main>
     <h2>Contacts:</h2>

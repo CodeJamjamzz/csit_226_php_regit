@@ -1,4 +1,5 @@
 <?php    
+    session_start();
     include 'connect.php';
     include 'header.php';
 ?>
@@ -14,7 +15,9 @@
 
     .container {
         width: 80%;
-        margin: 20px auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
         background: white;
         padding: 20px;
         box-shadow: 0 0 15px #ccc;
@@ -24,7 +27,7 @@
     h2 {
         text-align: center;
         font-size: 40px;
-        color: #358135;
+        color: black;
         margin-bottom: 20px;
     }
 
@@ -98,7 +101,7 @@
     /* Added styles for the graph container */
     .graph-container {
         width: 80%;
-        margin: 0px auto;
+        margin: 20px auto;
         padding: 30px 0px;
         box-shadow: 0 0 15px #ccc;
         border-radius: 8px;
@@ -113,10 +116,10 @@
     }
 </style>
 
-<div class="add-logout">
-    <a href="addnewstudent.php">Add New Student</a>
-    <a href="index.php">Logout</a>
-</div>
+<!-- <div class="add-logout">
+    <a href="addnewstudent.php"></a>
+    <a href="index.php"></a>
+</div> -->
 
 <div>
     <div class="graph-container">
@@ -135,12 +138,14 @@
                 <th>Start_Date</th>                     
                 <th>Organization</th>
                 <th>Department</th>
+                <th>Action</th>
             </tr> 
         </thead>  
         <tbody>
             <?php
             $query = "
                 SELECT 
+                    e.event_id,
                     e.event_name,
                     e.event_description,
                     e.start_date,
@@ -165,6 +170,63 @@
                 <td><?php echo $row['start_date']; ?></td>
                 <td><?php echo $row['organization_name']; ?></td>
                 <td><?php echo $row['department_name']; ?></td>
+
+                <td>
+                    <?php
+                        // Check if the attendee has already joined the event
+                        $event_id = $row['event_id'];
+                        $attendee_id = 1; // Replace with $_SESSION['attendee_id'] if needed
+
+                        $check_query = "
+                            SELECT 1
+                            FROM tblTicket
+                            WHERE event_id = '$event_id' AND attendee_id = '$attendee_id'
+                        ";
+
+                        $check_result = mysqli_query($connection, $check_query);
+                        $joined = ($check_result && mysqli_num_rows($check_result) > 0);
+                        ?>
+
+                        <?php if ($joined): ?>
+                            <button disabled style="background-color: gray; color: white; padding: 6px; margin: 20px;">Done</button>
+                        <?php else: ?>
+                            <form class="join-form" method="POST">
+                                <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
+                                <button type="submit" class="join-button" style="background-color: #4CAF50; color: white; padding: 6px 12px; margin: 20px;">Join</button>
+                            </form>
+                        <?php endif; ?>
+
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                        $(document).ready(function(){
+                            $(".join-form").submit(function(e){
+                                e.preventDefault();
+                                var form = $(this);
+                                var button = form.find(".join-button");
+                                var eventId = form.find("input[name='event_id']").val();
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "join_event.php",
+                                    data: { event_id: eventId },
+                                    success: function(response) {
+                                        if (response === "success") {
+                                            button.prop("disabled", true).text("Done").css("background-color", "gray");
+                                        } else if (response === "already_joined") {
+                                            button.prop("disabled", true).text("Done").css("background-color", "gray");
+                                        } else {
+                                            alert("Error joining event.");
+                                        }
+                                    },
+                                    error: function() {
+                                        alert("An error occurred.");
+                                    }
+                                });
+                            });
+                        });
+                        </script>
+                </td>
+
             </tr>
             <?php endwhile; ?>
         </tbody>

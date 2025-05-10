@@ -18,7 +18,7 @@
         <div class="categories">
             <div class="cate"><a href="index.php">Login</a></div>
             <div class="cate"><a href="about.php">About</a></div>
-            <div class="cate"><a href="contacts.php">Contact</a></div>
+            <div class="cate"><a href="contacts.html">Contact</a></div>
             <div class="cate"><a href="eventDashboard.php">Dashboard</a></div>
         </div>
         <img src="./index_files/search.png" alt="Search Icon" class="search-icon">
@@ -30,27 +30,20 @@
     <div style="display: flex; justify-content: center;">
     <div class="login-container">
         <h2>Attendee Registration Form</h2>
-        <form action="file:///C:/xampp/htdocs/f2Pinca/index.html#">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" class="login-input" required="">
+        <form action="login.php" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="login-input" required>
 
-          <!-- <label for="Email">Email:</label>
-          <input type="text" id="email" name="email" class="login-input" required="">
-      
-          <label for="course">Course:</label>
-          <input type="text" id="course" name="course" class="login-input" required=""> -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="login-course" required>
 
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" class="login-course" required="">
-      
-          <button type="submit" class="login-btn" style="margin-bottom: 20px"><a>Login</a></button>
-          <!-- <button style="background-color: #4CAF50; color: white; border: none; font-size: 15px; width: 50%; padding: 10px; cursor: default;">
-            <a href="register.php" style="text-decoration: none; color: white; pointer-events: none;">Register</a>
-            </button><br> -->
-            <button style="background-color: #4CAF50; color: white; border: none; font-size: 15px; width: 50%; padding: 10px; cursor: default;">
-                <a href="register.php" style="text-decoration: none; color: white; display: block; width: 100%; height: 100%;">Register</a></button><br>
+            <button type="submit" class="login-btn" style="margin-bottom: 20px"><a>Login</a></button>
 
+            <button style="background-color: #4CAF50; color: white; border: none; font-size: 15px; width: 50%; padding: 10px;">
+                <a href="register.php" style="text-decoration: none; color: white;">Register</a>
+            </button>
         </form>
+
       </div>
     </div>
 </main>
